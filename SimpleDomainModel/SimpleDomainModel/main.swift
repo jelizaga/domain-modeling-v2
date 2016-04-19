@@ -386,6 +386,7 @@ print("Description of a Money: \(moneyTest1.description)")
 print("Description of a Job: \(jobTest.description)")
 print("Description of a Person: \(personTest.description)")
 print("Description of a Family: \(familyTest.description)")
+print()
 
 // Testing Mathematics.
 print("MATHEMATICS TEST:")
