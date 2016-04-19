@@ -357,5 +357,35 @@ public class Family {
     
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// UNIT TESTS /////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+print("Beginning tests.")
+
+// Testing CustomStringConvertible.
+var moneyTest = Money(amount: 5, currency: "USD")
+var jobTest = Job(title: "Yolo", type: .Hourly(15.0))
+var personTest = Person(firstName: "Ted", lastName: "Neward", age: 50)
+
+print("Description of a Money: \(moneyTest.description)")
+print("Description of a Job: \(jobTest.description)")
+print("Description of a Person: \(personTest.description)")
+
+// Testing Mathematics.
+
+
+// Testing Double extension.
+var doubleTest1 = 5.0
+var doubleTest2 = 0.0
+var doubleTest3 = 100.00
+var doubleTest4 = 7.0
+print("\(doubleTest1) in USD: \(doubleTest1.USD)")
+print("\(doubleTest2) in CAN: \(doubleTest2.CAN)")
+print("\(doubleTest3) in EUR: \(doubleTest3.EUR)")
+print("\(doubleTest4) in GBP: \(doubleTest4.GBP)")
+
+print("")
+print("Tests complete.")
 
 
