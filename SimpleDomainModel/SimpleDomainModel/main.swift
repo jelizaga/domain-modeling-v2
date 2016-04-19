@@ -13,10 +13,15 @@ public class TestMe {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // STRUCT: Money //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public struct Money {
+public struct Money: CustomStringConvertible {
     
     public var amount: Int
     public var currency: String
+    public var description: String {
+        get {
+            return ("\(amount) \(currency)")
+        }
+    }
   
     // Calls conversions depending on the received currency.
     public mutating func convert(to: String) -> Money {
