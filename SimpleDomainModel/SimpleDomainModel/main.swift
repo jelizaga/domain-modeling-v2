@@ -316,6 +316,16 @@ public class Person: CustomStringConvertible {
 public class Family {
   
     private var members: [Person] = []
+    public var description: String {
+        get {
+            var familyList = ""
+            for person in members {
+                familyList += "\n \(person.firstName) \(person.lastName)"
+            }
+            familyList += "\n Household income: \(self.householdIncome())."
+            return familyList
+        }
+    }
   
     // Receives two Persons. If they each have no spouse, their spouse is set to each other.
     public init(spouse1: Person, spouse2: Person) {
@@ -369,10 +379,13 @@ print("CUSTOMSTRINGCONVERTIBLE TEST:")
 var moneyTest1 = Money(amount: 5, currency: "USD")
 var jobTest = Job(title: "Yolo", type: .Hourly(15.0))
 var personTest = Person(firstName: "Ted", lastName: "Neward", age: 50)
+var snoopDogg = Person(firstName: "Snoop", lastName: "Dogg", age: 50)
+snoopDogg._job = jobTest
+var familyTest = Family(spouse1: personTest, spouse2: snoopDogg)
 print("Description of a Money: \(moneyTest1.description)")
 print("Description of a Job: \(jobTest.description)")
 print("Description of a Person: \(personTest.description)")
-print()
+print("Description of a Family: \(familyTest.description)")
 
 // Testing Mathematics.
 print("MATHEMATICS TEST:")
