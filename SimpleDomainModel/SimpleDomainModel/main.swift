@@ -11,6 +11,44 @@ public class TestMe {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// PROTOCOL: Mathematics //////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Protocol for mathematics performed with Money.
+protocol Mathematics {
+    func add(this: Money, that: Money) -> Money
+    func sub(this: Money, from: Money) -> Money
+}
+
+// Returns Money: X + Y.
+// If Y's currency does not match the currency of X, it is converted to the currency of X.
+func add(this: Money, that: Money) -> Money {
+    var computed: Int = 0
+    if (this.currency == that.currency) {
+        computed = this.amount + that.amount
+    } else {
+        var thatConverted = that
+        thatConverted.convert(this.currency)
+        computed = this.amount + thatConverted.amount
+    }
+    return Money(amount: computed, currency: this.currency)
+}
+
+// Returns Money: X - Y.
+// If Y's currency does not match the currency of X, it is converted to the currency of X.
+func sub(from: Money, this: Money) -> Money {
+    var computed: Int = 0
+    if (from.currency == this.currency) {
+        computed = from.amount - this.amount
+    } else {
+        var thisConverted = this
+        thisConverted.convert(this.currency)
+        computed = this.amount - thisConverted.amount
+    }
+    return Money(amount: computed, currency: this.currency)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 // STRUCT: Money //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 public struct Money: CustomStringConvertible {
@@ -21,6 +59,10 @@ public struct Money: CustomStringConvertible {
         get {
             return ("\(amount) \(currency)")
         }
+    }
+    
+    var add: Double {
+        return 0.0
     }
   
     // Calls conversions depending on the received currency.
@@ -138,10 +180,15 @@ public struct Money: CustomStringConvertible {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // CLASS: Job /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class Job {
+public class Job: CustomStringConvertible {
     
     public var title: String
     public var type: JobType
+    public var description: String {
+        get {
+            return ("Job: \(title)")
+        }
+    }
     
     public enum JobType {
         case Hourly(Double)
@@ -179,11 +226,16 @@ public class Job {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // CLASS: Person //////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-public class Person {
+public class Person: CustomStringConvertible {
     
     public var firstName : String = ""
     public var lastName : String = ""
     public var age: Int = 0
+    public var description: String {
+        get {
+            return ("\(firstName) \(lastName), age \(age).")
+        }
+    }
 
     // Private variables for
     private var _job: Job?
@@ -277,8 +329,6 @@ public class Family {
     }
     
 }
-
-
 
 
 
