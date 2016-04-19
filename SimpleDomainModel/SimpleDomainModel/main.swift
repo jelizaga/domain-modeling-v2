@@ -23,7 +23,7 @@ protocol Mathematics {
 // Returns Money: X + Y.
 // If Y's currency does not match the currency of X, it is converted to the currency of X.
 func add(this: Money, that: Money) -> Money {
-    var computed: Int = 0
+    var computed = 0
     if (this.currency == that.currency) {
         computed = this.amount + that.amount
     } else {
@@ -208,7 +208,7 @@ public class Job: CustomStringConvertible {
     public var type: JobType
     public var description: String {
         get {
-            return ("Job: \(title)")
+            return ("Job title: \(title)")
         }
     }
     
@@ -256,7 +256,7 @@ public class Person: CustomStringConvertible {
     public var age: Int = 0
     public var description: String {
         get {
-            return ("\(firstName) \(lastName), age \(age).")
+            return ("\(firstName) \(lastName), age \(age)")
         }
     }
 
@@ -361,21 +361,30 @@ public class Family {
 // UNIT TESTS /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-print("Beginning tests.")
+print("BEGINNING UNIT TESTS.")
+print()
 
 // Testing CustomStringConvertible.
-var moneyTest = Money(amount: 5, currency: "USD")
+print("CUSTOMSTRINGCONVERTIBLE TEST:")
+var moneyTest1 = Money(amount: 5, currency: "USD")
 var jobTest = Job(title: "Yolo", type: .Hourly(15.0))
 var personTest = Person(firstName: "Ted", lastName: "Neward", age: 50)
-
-print("Description of a Money: \(moneyTest.description)")
+print("Description of a Money: \(moneyTest1.description)")
 print("Description of a Job: \(jobTest.description)")
 print("Description of a Person: \(personTest.description)")
+print()
 
 // Testing Mathematics.
-
+print("MATHEMATICS TEST:")
+var moneyTest2 = Money(amount: 10, currency: "USD")
+var moneyTest3 = add(moneyTest1, that: moneyTest2)
+print("\(moneyTest1.description) + \(moneyTest2.description) = \(moneyTest3)")
+var moneyTest4 = sub(moneyTest3, this: moneyTest2)
+print("\(moneyTest3) - \(moneyTest2) = \(moneyTest4)")
+print()
 
 // Testing Double extension.
+print("DOUBLE EXTENSION TEST:")
 var doubleTest1 = 5.0
 var doubleTest2 = 0.0
 var doubleTest3 = 100.00
@@ -384,8 +393,8 @@ print("\(doubleTest1) in USD: \(doubleTest1.USD)")
 print("\(doubleTest2) in CAN: \(doubleTest2.CAN)")
 print("\(doubleTest3) in EUR: \(doubleTest3.EUR)")
 print("\(doubleTest4) in GBP: \(doubleTest4.GBP)")
+print()
 
-print("")
-print("Tests complete.")
+print("TESTS COMPLETE.")
 
 
